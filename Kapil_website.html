@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kapil Sharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf8f5;
+      --ink: #1a1714;
+      --ink-light: #4a4540;
+      --ink-muted: #8a8078;
+      --accent: #c4622d;
+      --accent-soft: #f0e8e0;
+      --rule: #e2dcd4;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      padding: 7rem 3rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    /* ── HERO ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .hero-left { padding-top: 2rem; }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-bio p + p { margin-top: 1rem; }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      border: 1px solid var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ink);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border-left: 1px solid var(--rule);
+      padding-left: 4rem;
+    }
+
+    .stat-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat-item:last-child { border-bottom: none; }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ── RESUME ── */
+    #resume { border-top: 1px solid var(--rule); }
+
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .resume-grid { display: flex; flex-direction: column; gap: 3rem; }
+
+    .resume-block {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .resume-block:last-child { border-bottom: none; }
+
+    .resume-meta {
+      padding-top: 0.15rem;
+    }
+
+    .resume-date {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .resume-org {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .resume-location {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .resume-role {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .resume-context {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .resume-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .resume-bullets li {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .resume-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0.3rem 0.65rem;
+      background: var(--accent-soft);
+      color: var(--ink-light);
+      border: 1px solid var(--rule);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── ANALYSIS / ESSAYS / WRITING ── */
+    #analysis, #essays, #writing { border-top: 1px solid var(--rule); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: default;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height 0.3s ease;
+    }
+
+    .card:hover { border-color: var(--ink-muted); }
+    .card:hover::before { height: 100%; }
+
+    .card-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    .card-status {
+      margin-top: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--rule);
+      display: inline-block;
+    }
+
+    .status-dot.live { background: #5cb85c; }
+    .status-dot.progress { background: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--rule);
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-subtext {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-top: 0.5rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--rule);
+      transition: all 0.2s;
+      group: true;
+    }
+
+    .contact-link:hover {
+      border-color: var(--ink);
+      background: var(--accent-soft);
+    }
+
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-link-value {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .contact-link-arrow {
+      margin-left: auto;
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      transition: transform 0.2s;
+    }
+
+    .contact-link:hover .contact-link-arrow { transform: translateX(4px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.2s; }
+    .fade-up:nth-child(3) { animation-delay: 0.3s; }
+    .fade-up:nth-child(4) { animation-delay: 0.4s; }
+    .fade-up:nth-child(5) { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      section { padding: 6rem 1.5rem 4rem; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; }
+      .resume-block { grid-template-columns: 1fr; gap: 0.5rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#about" class="nav-logo">Kapil Sharma</a>
+    <ul class="nav-links">
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#analysis">Analysis</a></li>
+      <li><a href="#essays">Essays</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="hero-left">
+      <div class="section-label fade-up">Healthcare Compliance & Strategy</div>
+      <h1 class="hero-name fade-up">
+        Kapil<br /><em>Sharma</em>
+      </h1>
+      <div class="hero-bio fade-up">
+        <p>I'm a healthcare compliance consultant, researcher, and writer based in Pittsburgh, PA.</p>
+        <p>My path into healthcare wasn't a straight line. I started where most people do: wanting to help people directly. I spent years working in hospitals and shadowing physicians, genuinely pursuing a future in clinical medicine. But somewhere along the way I recognized something about myself, that my strengths weren't at the bedside, they were in the room where decisions get made.</p>
+        <p>What I bring that's harder to find is a dual vantage point. I've seen how healthcare works on the ground and spent the last several years understanding the regulatory architecture that shapes all of it: HIPAA, CMS, ACA, Medicare and Medicaid policy, payer compliance. Most people have one or the other. I have both.</p>
+        <p>I'm preparing to take that further through law school, with a long-term focus on healthcare policy and advocacy. Outside of work you'll find me in nature, on a trail, or planning my next trip to immerse myself in a new culture.</p>
+      </div>
+      <div class="hero-actions fade-up">
+        <a href="#resume" class="btn btn-primary">View Resume</a>
+        <a href="#analysis" class="btn btn-outline">Read My Work</a>
+        <a href="mailto:kas1172@pitt.edu" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right fade-up">
+      <div class="stat-item">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Years in Healthcare Consulting</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$2.8M</div>
+        <div class="stat-label">Revenue Recovered for Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Healthcare Clients Managed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Government Penalties Across All Engagements</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">B.S.</div>
+        <div class="stat-label">Psychology, University of Pittsburgh</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="resume-header">
+      <div>
+        <div class="section-label">Experience & Education</div>
+        <h2 class="section-title">Resume</h2>
+      </div>
+      <a href="#" class="btn btn-outline">Download PDF</a>
+    </div>
+
+    <div class="resume-grid">
+
+      <!-- Source 1 -->
+      <div class="resume-block">
+        <div class="resume-meta">
+          <div class="resume-date">Nov 2022 – Oct 2024</div>
+          <div class="resume-org">Source 1 Healthcare Solutions</div>
+          <div class="resume-location">Pittsburgh, PA</div>
+        </div>
+        <div>
+          <div class="resume-role">Consultant / Client Lead</div>
+          <p class="resume-context">Source 1 is a Pittsburgh-based compliance and revenue integrity consulting firm serving healthcare providers ranging from small physician practices to large health systems. As Consultant and Client Lead, I served as the primary regulatory subject matter expert across a portfolio of 10+ clients, managing engagements end-to-end and presenting findings directly to C-suite and board-level leadership.</p>
+          <ul class="resume-bullets">
+            <li>Led U.S. market entry compliance work for an international AI telehealth company targeting Medicare and ACA markets, scoping gaps across HIPAA, CMS, ACA, and state DOI requirements and building a risk-scored options framework presented to C-suite leadership</li>
+            <li>Analyzed millions of rows of claims data using SQL to identify denial patterns, coding inefficiencies, and revenue leakage, recovering $2.8 million in lost revenue and reducing denial rates by 20%</li>
+            <li>Served as primary subject matter expert across CMS, Medicare/Medicaid, ACA, and state DOI requirements, resolving complex multi-jurisdictional compliance issues with zero government penalties</li>
+            <li>Designed and executed operational assessments benchmarking clients against regulatory standards, delivering prioritized recommendation decks with 90-day and long-term improvement roadmaps</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- St. Clair -->
+      <div class="resume-block">
+        <div class="resume-meta">
+          <div class="resume-date">Mar 2026 – Present</div>
+          <div class="resume-org">St. Clair Hospital</div>
+          <div class="resume-location">Pittsburgh, PA</div>
+        </div>
+        <div>
+          <div class="resume-role">Psychiatric Aide</div>
+          <p class="resume-context">Direct patient care in an acute inpatient psychiatric setting, with firsthand exposure to how payer constraints, prior authorization, and formulary decisions affect medication access and care delivery at the point of service.</p>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="resume-block">
+        <div class="resume-meta">
+          <div class="resume-date">Dec 2025</div>
+          <div class="resume-org">University of Pittsburgh</div>
+          <div class="resume-location">Pittsburgh, PA</div>
+        </div>
+        <div>
+          <div class="resume-role">B.S. Psychology</div>
+          <p class="resume-context">Relevant coursework: Neuroscience, Organizational Psychology, Healthcare Strategic Management and Policy, Cognitive Psychology</p>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="resume-block">
+        <div class="resume-meta">
+          <div class="resume-date">Proficiencies</div>
+          <div class="resume-org">Skills</div>
+        </div>
+        <div>
+          <div class="skills-grid">
+            <div>
+              <div class="skill-group-title">Technical</div>
+              <div class="skill-tags">
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Excel</span>
+                <span class="skill-tag">Data Visualization</span>
+                <span class="skill-tag">ETL</span>
+                <span class="skill-tag">Epic</span>
+                <span class="skill-tag">Cerner</span>
+                <span class="skill-tag">Meditech</span>
+              </div>
+            </div>
+            <div>
+              <div class="skill-group-title">Industry</div>
+              <div class="skill-tags">
+                <span class="skill-tag">HIPAA</span>
+                <span class="skill-tag">CMS</span>
+                <span class="skill-tag">ACA</span>
+                <span class="skill-tag">Medicare/Medicaid</span>
+                <span class="skill-tag">Revenue Cycle</span>
+                <span class="skill-tag">Health Plan Compliance</span>
+                <span class="skill-tag">CPT Coding</span>
+              </div>
+            </div>
+            <div>
+              <div class="skill-group-title">Tools</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Salesforce</span>
+                <span class="skill-tag">Asana</span>
+                <span class="skill-tag">Jira</span>
+                <span class="skill-tag">Monday.com</span>
+                <span class="skill-tag">PowerPoint</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ANALYSIS -->
+  <section id="analysis">
+    <div class="section-label">Data-Driven Work</div>
+    <h2 class="section-title">Analysis</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-tag">Medicaid · Behavioral Health · Python + Excel</div>
+        <div class="card-title">Prior Authorization as a Behavioral Health Access Barrier: A State-by-State Analysis</div>
+        <div class="card-desc">Using 2024 MCPAR data across 46 states to examine how prior authorization burden and parity compliance gaps correlate with behavioral health appeals and grievances volumes.</div>
+        <div class="card-status"><span class="status-dot progress"></span> In Progress</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Medicare · Observation Status · SQL</div>
+        <div class="card-title">Medicare Observation Status Trends and SNF Eligibility Consequences</div>
+        <div class="card-desc">How the inpatient vs. observation classification decision affects skilled nursing facility eligibility and patient cost exposure — analyzed through CMS utilization data.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Medicare Part D · Market Access · Python</div>
+        <div class="card-title">Part D Formulary Coverage and Tier Placement Variation</div>
+        <div class="card-desc">How coverage decisions and tier placements vary across plan types for key drug classes, and what that means for patient access and payer strategy.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Medicaid · Managed Care · Excel</div>
+        <div class="card-title">Medicaid Managed Care Program Variation Across States</div>
+        <div class="card-desc">A comparative analysis of how federal operating authority and benefit design choices in Medicaid managed care programs create uneven access across state lines.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESSAYS -->
+  <section id="essays">
+    <div class="section-label">Policy & Regulatory Writing</div>
+    <h2 class="section-title">Essays</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-tag">Medicare · CMS Policy · Regulatory Critique</div>
+        <div class="card-title">The Two-Midnight Rule and the Observation Status Problem</div>
+        <div class="card-desc">A regulatory critique arguing that the two-midnight rule has not fixed the underlying incentive misalignment driving inappropriate observation status classifications — and what a real fix would look like.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Medicare · Drug Pricing · IRA</div>
+        <div class="card-title">What the IRA Medicare Negotiation Actually Changes</div>
+        <div class="card-desc">A balanced policy analysis of the first round of Medicare drug price negotiations, what the results mean for formulary dynamics, and what the IRA still leaves unaddressed.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Medicare · AI · Prior Authorization</div>
+        <div class="card-title">WISeR, the Stop Deadly Denials Act, and the Incentive Problem</div>
+        <div class="card-desc">CMS frames WISeR as a tool to reduce waste. But when contractors are paid a percentage of savings, the incentive isn't accuracy — it's denial. A case for the Stop Deadly Denials Act.</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="section-label">Beyond Healthcare</div>
+    <h2 class="section-title">Writing</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-tag">Sociology · Political Theory · Cultural Analysis</div>
+        <div class="card-title">Imagined Communities, Oppression, and Rebellion in Andor</div>
+        <div class="card-desc">Drawing on Benedict Anderson, Craig Calhoun, and Enric Castelló to examine how the Disney+ series Andor portrays the emotional architecture of empire — how loyalty is sustained, fractured, and ultimately replaced by rebellion.</div>
+        <div class="card-status"><span class="status-dot live"></span> Available</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="section-label">Get in Touch</div>
+        <h2 class="contact-heading">Let's<br /><em style="font-family: var(--serif); font-style: italic; color: var(--accent);">connect.</em></h2>
+        <p class="contact-subtext">Whether you're interested in my work, exploring a collaboration, or want to talk healthcare policy — I'd like to hear from you.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:kas1172@pitt.edu" class="contact-link">
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">kas1172@pitt.edu</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/in/kapil-sharma-252ba823b" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-value">kapil-sharma-252ba823b</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://github.com/kas1172" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-value">github.com/kas1172</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Kapil Sharma</span>
+    <span class="footer-note">Pittsburgh, PA · Healthcare Compliance & Strategy</span>
+  </footer>
+
+</body>
+</html>
