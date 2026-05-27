@@ -1,0 +1,429 @@
+bash
+
+cat /mnt/user-data/outputs/mcpar-analysis.html
+Output
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prior Authorization is Failing Behavioral Health Patients | Kapil Sharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf8f5;
+      --ink: #1a1714;
+      --ink-light: #4a4540;
+      --ink-muted: #8a8078;
+      --accent: #c4622d;
+      --accent-soft: #f0e8e0;
+      --rule: #e2dcd4;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-back {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--accent); }
+
+    /* ARTICLE */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 9rem 2rem 6rem;
+    }
+
+    .article-meta {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .article-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .article-tag::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.05rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    .article-details {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .article-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .detail-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .detail-value {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--ink-light);
+    }
+
+    /* BODY TEXT */
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin: 3rem 0 1rem;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .article-body p {
+      font-size: 1rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-body strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* STAT CALLOUTS */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+
+    .stat-box {
+      background: var(--cream);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-box-number {
+      font-family: var(--serif);
+      font-size: 2.25rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-box-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    /* CHART */
+    .chart-container {
+      margin: 2.5rem 0;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .chart-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .chart-caption {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    /* PULLQUOTE */
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 1.75rem;
+      margin: 2.5rem 0;
+    }
+
+    .pullquote p {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* METHODOLOGY */
+    details {
+      border: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    summary {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+
+    summary:hover { color: var(--ink); }
+
+    .methodology-content {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    .methodology-content p + p { margin-top: 0.75rem; }
+
+    /* FOOTER NAV */
+    .article-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-back {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-back:hover { color: var(--accent); }
+
+    .footer-credit {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      article { padding: 7rem 1.25rem 4rem; }
+      .stat-row { grid-template-columns: 1fr; }
+      .article-details { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Kapil Sharma</a>
+    <a href="index.html#analysis" class="nav-back">← Analysis</a>
+  </nav>
+
+  <article>
+
+    <div class="article-meta">
+      <div class="article-tag">Medicaid · Behavioral Health · Prior Authorization</div>
+      <h1 class="article-title">Prior Authorization is Failing Behavioral Health Patients and the Data Shows Where</h1>
+      <p class="article-subtitle">A state-by-state analysis of prior authorization denial burden, behavioral health access, and parity compliance gaps in Medicaid managed care.</p>
+      <div class="article-details">
+        <div class="article-detail">
+          <span class="detail-label">Data Source</span>
+          <span class="detail-value">CMS MCPAR PUF 2024</span>
+        </div>
+        <div class="article-detail">
+          <span class="detail-label">States Covered</span>
+          <span class="detail-value">46 + D.C.</span>
+        </div>
+        <div class="article-detail">
+          <span class="detail-label">Tools</span>
+          <span class="detail-value">Python, pandas, matplotlib</span>
+        </div>
+        <div class="article-detail">
+          <span class="detail-label">Published</span>
+          <span class="detail-value">2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Every year, millions of Americans seek mental health and substance use treatment through Medicaid managed care. And every year, a significant portion of them hit the same wall: a prior authorization denial. Before a psychiatrist can prescribe, before a patient can be admitted, before treatment can begin, an insurance plan's algorithm or administrator says no. The patient or provider can appeal. Many do. But the appeal takes time, and in behavioral health, time is the difference between stability and crisis.</p>
+
+      <p>This analysis examines 2024 Medicaid Managed Care Program Annual Report data across 46 states to ask a simple question: where is this burden concentrated, and does it correlate with how seriously states are taking their legal obligations under mental health parity law?</p>
+
+      <p>The answer is uncomfortable. The states carrying the heaviest prior authorization denial burden are disproportionately the same states failing to meet basic parity compliance requirements, meaning patients in those states are fighting harder for care that the law already says they're entitled to.</p>
+
+      <h2>What the Data Shows</h2>
+
+      <p>The 2024 MCPAR dataset covers 46 states and includes plan-level reporting on prior authorization volumes, denial appeal rates, behavioral health service appeals and grievances, and parity compliance status. Three patterns stand out.</p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-box-number">138K+</div>
+          <div class="stat-box-label">PA Denial Appeals in New York Alone</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-number">3,537</div>
+          <div class="stat-box-label">Behavioral Health Appeals in Kentucky</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-number">~1 in 3</div>
+          <div class="stat-box-label">State Programs Out of Parity Compliance</div>
+        </div>
+      </div>
+
+      <p><strong>First, the prior authorization burden is massive and uneven.</strong> New York recorded over 138,000 prior authorization denial appeals in a single reporting year. Texas exceeded 56,000. Florida and Ohio each crossed 30,000. These are not edge cases. They represent hundreds of thousands of patients and providers spending time and resources fighting decisions that should never have been made in the first place.</p>
+
+      <p><strong>Second, behavioral health appeals tell a parallel story.</strong> Kentucky recorded over 3,500 behavioral health service appeals, the highest in the dataset, while simultaneously being one of the states fully out of compliance on parity analysis requirements. Indiana, Virginia, Illinois, and Texas round out the top five for behavioral health appeals, each carrying thousands of unresolved disputes over mental health and substance use care.</p>
+
+      <p><strong>Third, parity compliance is inconsistent at best.</strong> Federal law requires states to conduct and publish regular analyses confirming that their Medicaid managed care programs treat behavioral health benefits no less favorably than medical benefits. Roughly a third of programs in this dataset had not posted a current parity analysis. Florida, North Carolina, Kentucky, Iowa, Idaho, Nevada, and Wisconsin were among the states with programs fully out of compliance, meaning patients in those states have less visibility into whether their coverage is even legal.</p>
+
+      <div class="chart-container">
+        <img src="analyses/mcpar-behavioral-health/mcpar_bh_analysis.png" alt="Four-panel visualization of MCPAR behavioral health and prior authorization data by state" />
+        <div class="chart-caption">Figure 1. MCPAR 2024: Prior Authorization Denial Appeals, Behavioral Health Appeals, and Parity Compliance by State. Green indicates full parity compliance, orange indicates mixed compliance, red indicates no compliance.</div>
+      </div>
+
+      <h2>Why This Matters</h2>
+
+      <p>Prior authorization was designed as a cost control tool. The idea is straightforward: require clinical justification before approving expensive or potentially unnecessary services, and you reduce waste. In theory, it is a reasonable mechanism.</p>
+
+      <p>In practice, for behavioral health, it does not work that way.</p>
+
+      <p>Mental health and substance use treatment operates on a different timeline than most medical care. A patient in psychiatric crisis cannot wait three days for an expedited review. A person in early recovery cannot pause treatment while a plan decides whether their residential stay is medically necessary. The administrative burden of prior authorization, the paperwork, the phone calls, the appeals, falls on providers who are already stretched thin and patients who are already vulnerable. When a denial comes, many patients simply do not pursue the appeal. They go without care.</p>
+
+      <div class="pullquote">
+        <p>The states carrying the heaviest prior authorization denial burden are disproportionately the same states failing to meet basic parity compliance requirements.</p>
+      </div>
+
+      <p>The data reflects this. States with the heaviest prior authorization denial burdens also show the highest behavioral health appeal volumes, meaning patients and providers are fighting back, but only after care has already been delayed or denied. And in states where parity compliance is weak, there is no independent check on whether those denials are even legal.</p>
+
+      <p>This is not an abstraction. It is a structural failure that concentrates harm on the people least equipped to absorb it: low-income patients, people with serious mental illness, and those navigating substance use recovery, in the states least accountable for fixing it.</p>
+
+      <h2>Why This Should Concern Policymakers Now</h2>
+
+      <p>This analysis documents what is already happening in Medicaid managed care. The CMS WISeR model, launched in January 2026, proposes to bring AI-driven prior authorization into traditional Medicare, the same mechanism, applied to a new population. The companies administering WISeR are paid a percentage of savings generated through their review decisions. That incentive structure does not reward accuracy. It rewards denial.</p>
+
+      <p>The behavioral health access crisis documented here did not emerge overnight. It was built gradually, through coverage design decisions, compliance gaps, and algorithmic tools that optimize for cost rather than care. Scaling that model into Medicare, without addressing the incentive problem, risks repeating the same pattern for a different population.</p>
+
+      <p>The Stop Deadly Denials Act, introduced by Representatives Jayapal and Khanna in April 2026, would block WISeR and prohibit CMS from testing prior authorization models that use AI-driven denials without physician review. The evidence from Medicaid managed care suggests that prohibition is not only reasonable. It is necessary.</p>
+
+    </div>
+
+    <details>
+      <summary>Methodology</summary>
+      <div class="methodology-content">
+        <p>Data source: CMS Medicaid Managed Care Program Annual Report (MCPAR) Public Use File, 2024 reporting period. Dataset includes 177,973 rows across 46 states and the District of Columbia, covering plan-level responses to standardized reporting questions.</p>
+        <p>Key variables analyzed: resolved pre-service and post-service authorization denial appeals, resolved inpatient and outpatient behavioral health service appeals and grievances, and state parity analysis compliance status. All variables were extracted and aggregated to the state level using Python (pandas). Denial appeal volumes and behavioral health appeal volumes were normalized by plan count to account for variation in program size across states.</p>
+        <p>Parity compliance was coded as "All Yes" where all programs in a state reported posting a current parity analysis, "All No" where none did, and "Mixed" where responses varied across programs within the same state. Visualizations were produced using matplotlib. Full code is available on GitHub.</p>
+      </div>
+    </details>
+
+    <div class="article-footer">
+      <a href="index.html#analysis" class="footer-back">← Back to Analysis</a>
+      <span class="footer-credit">Kapil Sharma · 2026</span>
+    </div>
+
+  </article>
+
+</body>
+</html>
