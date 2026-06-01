@@ -320,7 +320,7 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       margin-top: 1rem;
     }
@@ -348,6 +348,60 @@
       color: var(--ink-light);
       border: 1px solid var(--rule);
       letter-spacing: 0.04em;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { border-top: 1px solid var(--rule); }
+
+    .project-card {
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height 0.3s ease;
+    }
+
+    .project-card:hover { border-color: var(--ink-muted); }
+    .project-card:hover::before { height: 100%; }
+
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    .project-desc p + p { margin-top: 0.85rem; }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
     }
 
     /* ── ANALYSIS / ESSAYS / WRITING ── */
@@ -559,7 +613,7 @@
       .hero-right { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; }
       .resume-block { grid-template-columns: 1fr; gap: 0.5rem; }
       .cards-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
@@ -572,6 +626,7 @@
     <a href="#about" class="nav-logo">Kapil Sharma</a>
     <ul class="nav-links">
       <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#analysis">Analysis</a></li>
       <li><a href="#essays">Essays</a></li>
       <li><a href="#writing">Writing</a></li>
@@ -582,15 +637,15 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="hero-left">
-      <div class="section-label fade-up">Healthcare Compliance & Strategy</div>
+      <div class="section-label fade-up">Strategy · Compliance · Policy</div>
       <h1 class="hero-name fade-up">
         Kapil<br /><em>Sharma</em>
       </h1>
       <div class="hero-bio fade-up">
-        <p>I'm a healthcare consultant, researcher, and writer based in Pittsburgh, PA.</p>
-        <p>My path into healthcare wasn't a straight line. I started where most people do: wanting to help people directly. I spent years working in hospitals and shadowing physicians, genuinely pursuing a future in clinical medicine. But somewhere along the way I recognized something about myself, that my strengths weren't at the bedside, they were in the room where decisions get made.</p>
-        <p>What I bring that's harder to find is a dual vantage point. I've seen how healthcare works on the ground and spent the last several years understanding the regulatory architecture that shapes all of it: HIPAA, CMS, ACA, Medicare and Medicaid policy, payer compliance. Most people have one or the other. I have both.</p>
-        <p>I'm preparing to take that further through law school, with a long-term focus on healthcare policy and advocacy. Outside of work you'll find me in nature, on a trail, or planning my next trip to immerse myself in a new culture.</p>
+        <p>I'm a consultant, researcher, and writer based in Pittsburgh, PA — with deep roots in healthcare and a broader interest in how regulatory systems shape industries.</p>
+        <p>My path into this work wasn't a straight line. I started where most people do: wanting to help people directly. I spent years working in hospitals and shadowing physicians, genuinely pursuing a future in clinical medicine. But somewhere along the way I recognized something about myself — my strengths weren't at the bedside, they were in the room where decisions get made.</p>
+        <p>What I bring that's harder to find is the combination of operational experience and regulatory fluency — knowing how complex systems work from the inside and understanding the policy framework that governs them. I've navigated multi-jurisdiction compliance environments, built analytical frameworks from raw data, and translated technical findings into client strategy and board-ready recommendations. The domain is healthcare; the skills travel.</p>
+        <p>I'm preparing to take this further through law school, with a long-term focus on policy, regulatory strategy, and public interest advocacy. Outside of work you'll find me on a trail or planning my next trip somewhere new.</p>
       </div>
       <div class="hero-actions fade-up">
         <a href="#resume" class="btn btn-primary">View Resume</a>
@@ -723,10 +778,49 @@
                 <span class="skill-tag">PowerPoint</span>
               </div>
             </div>
+            <div>
+              <div class="skill-group-title">Core</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Regulatory Analysis</span>
+                <span class="skill-tag">Policy Research</span>
+                <span class="skill-tag">Client Advising</span>
+                <span class="skill-tag">Stakeholder Communication</span>
+                <span class="skill-tag">Risk Frameworks</span>
+                <span class="skill-tag">Written Synthesis</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Tools I've Built</div>
+    <h2 class="section-title">Projects</h2>
+
+    <div style="margin-top: 3rem;">
+      <div class="project-card">
+        <div class="project-card-header">
+          <div>
+            <div class="card-tag" style="margin-bottom: 0.6rem;">Python · Claude API · GitHub Actions · Static Site</div>
+            <div class="project-title">Healthcare Regulatory &amp; Policy Monitor</div>
+          </div>
+          <div class="card-status" style="white-space: nowrap; flex-shrink: 0;">
+            <span class="status-dot live"></span> Live · Weekly
+          </div>
+        </div>
+        <div class="project-desc">
+          <p>Working in healthcare compliance, I spent a disproportionate amount of time just staying current — scanning OIG enforcement actions, Federal Register notices, new CMS rules, FDA actions, and congressional activity across a dozen sources, for a dozen clients. The manual overhead was real. I'd spend hours each week sorting through noise to find the two or three things that actually mattered to a specific client in a specific regulatory context.</p>
+          <p>So I built infrastructure to do that automatically. A pipeline pulls from 30+ government APIs and industry feeds every Monday, uses a language model to classify urgency and synthesize the implications for two distinct audiences — compliance and strategy professionals, and policy readers — and publishes a structured briefing as a static site. Zero manual effort after setup. The dashboard I wished had existed when I needed it most.</p>
+        </div>
+        <div class="project-links">
+          <a href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/" target="_blank" class="btn btn-primary">View Live Dashboard →</a>
+          <a href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/how-it-works.html" target="_blank" class="btn btn-outline">How It Works</a>
+        </div>
+      </div>
     </div>
   </section>
 
