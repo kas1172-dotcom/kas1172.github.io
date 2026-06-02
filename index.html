@@ -435,8 +435,11 @@
       transition: height 0.3s ease;
     }
 
-    .card:hover { border-color: var(--ink-muted); }
-    .card:hover::before { height: 100%; }
+    /* Only clickable cards (rendered as <a>) get the interactive hover treatment,
+       so "Coming Soon" placeholder cards don't falsely signal they open. */
+    a.card { cursor: pointer; }
+    a.card:hover { border-color: var(--ink-muted); }
+    a.card:hover::before { height: 100%; }
 
     .card-tag {
       font-family: var(--mono);
@@ -834,7 +837,7 @@
         <div class="card-tag">Medicaid · Behavioral Health · Python + Excel</div>
         <div class="card-title">Prior Authorization as a Behavioral Health Access Barrier: A State-by-State Analysis</div>
         <div class="card-desc">Using 2024 MCPAR data across 46 states to examine how prior authorization burden and parity compliance gaps correlate with behavioral health appeals and grievances volumes.</div>
-        <div class="card-status"><span class="status-dot progress"></span> In Progress</div>
+        <div class="card-status"><span class="status-dot live"></span> Read Analysis →</div>
       </div>
 
       <div class="card">
@@ -899,7 +902,7 @@
         <div class="card-tag">Sociology · Political Theory · Cultural Analysis</div>
         <div class="card-title">Imagined Communities, Oppression, and Rebellion in Andor</div>
         <div class="card-desc">Drawing on Benedict Anderson, Craig Calhoun, and Enric Castelló to examine how the Disney+ series Andor portrays the emotional architecture of empire — how loyalty is sustained, fractured, and ultimately replaced by rebellion.</div>
-        <div class="card-status"><span class="status-dot live"></span> Available</div>
+        <div class="card-status"><span class="status-dot"></span> Coming Soon</div>
       </div>
     </div>
   </section>
