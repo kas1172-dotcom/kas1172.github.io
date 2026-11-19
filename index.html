@@ -433,6 +433,26 @@ body:has(dialog[open]) {overflow:hidden}
 @keyframes menu-in {from{opacity:0;transform:translateY(-2rem)}}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}}
+
+.resume-grid {position:relative;padding-left:clamp(1.5rem,4vw,3rem)}
+.resume-grid::before,.resume-grid::after {content:"";position:absolute;left:4px;top:0;bottom:0;width:2px;background:var(--line)}
+.resume-grid::after {background:var(--ink);transform-origin:top;transform:scaleY(var(--route,1))}
+.resume-block {position:relative}
+.resume-block::before {content:"";position:absolute;top:2.35rem;left:calc(0px - clamp(1.5rem,4vw,3rem));width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);background:var(--paper);z-index:1}
+.resume-block.passed::before {background:var(--ink)}
+.menu-links [aria-current="location"] {text-decoration:underline;text-underline-offset:.12em}
+.closing-scene {height:clamp(14rem,35vw,29rem);position:relative;isolation:isolate;overflow:hidden;display:grid;align-items:center;border-block:1px solid var(--line);background:#e5e1db}
+.closing-scene b {font:700 clamp(6rem,20vw,21rem)/.9 var(--display);letter-spacing:-.095em;text-align:center}
+.closing-scene button {position:absolute;right:1rem;top:1rem;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper);padding:.5rem .9rem}
+.street {position:absolute;inset:0;pointer-events:none}
+.walker {position:absolute;left:-3rem;bottom:var(--ground);font-size:var(--size);width:.42em;height:.81em;border-radius:45% 45% 12% 12%;background:currentColor;color:var(--shade);animation:cross var(--speed) linear var(--offset) infinite}
+.walker::before {content:"";position:absolute;top:-.29em;left:.08em;width:.26em;height:.28em;border-radius:50%;background:currentColor}
+.walker i,.walker::after {content:"";position:absolute;top:90%;left:.13em;width:.12em;height:.49em;background:currentColor;transform-origin:top;animation:stride .42s ease-in-out infinite alternate}
+.walker::after {animation-direction:alternate-reverse}
+@keyframes cross {to{translate:calc(100vw + 6rem) 0}}
+@keyframes stride {from{rotate:-22deg}to{rotate:22deg}}
+.closing-scene:not(.playing) .walker,.closing-scene:not(.playing) .walker::after,.closing-scene:not(.playing) .walker i {animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.closing-scene button,.street{display:none}}
 </style>
 </head>
 <body>
@@ -733,6 +753,7 @@ body:has(dialog[open]) {overflow:hidden}
 </div>
 </section>
 <!-- FOOTER -->
+<div class="closing-scene" aria-label="Kapil Sharma"><b aria-hidden="true">KAPIL.</b><div class="street" aria-hidden="true"></div><button type="button" aria-label="Pause footer animation" aria-pressed="false">Pause motion</button></div>
 <footer>
 <span class="footer-name">Kapil Sharma</span>
 <span class="footer-note">Pittsburgh, PA · Founder, Whis LLC</span>
@@ -753,21 +774,40 @@ traveler.innerHTML = source.innerHTML;
 document.body.append(traveler);
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 let frame = 0;
-function positionPortrait() {
+let easedProgress;
+function positionPortrait(time) {
   frame = 0;
   const from = source.getBoundingClientRect();
   const to = destination.getBoundingClientRect();
-  const distance = Math.max(1, scrollY + to.top + to.height / 2 - innerHeight / 2);
-  const progress = Math.min(1, Math.max(0, scrollY / distance));
-  const active = !motion.matches && progress > 0 && progress < 1;
+  // The moving portrait lands when its biography slot reaches the lower edge.
+  const end = Math.max(1, scrollY + to.bottom - innerHeight + 20);
+  const target = Math.max(0, Math.min(1, scrollY / end));
+  const previous = positionPortrait.lastTime || time;
+  positionPortrait.lastTime = time;
+  const elapsed = Math.max(12, Math.min(100, time - previous));
+  if (easedProgress === undefined || motion.matches) easedProgress = target;
+  easedProgress += (target - easedProgress) * (1 - Math.exp(-elapsed / 65));
+  if (Math.abs(target - easedProgress) < .001) easedProgress = target;
+  const t = easedProgress;
+  const active = !motion.matches && t > 0 && t < 1 && to.bottom > 0;
   document.body.classList.toggle('photo-in-motion', active);
   traveler.hidden = !active;
-  if (!active) return;
-  const t = progress * progress * (3 - 2 * progress);
-  for (const key of ['left', 'top', 'width', 'height']) {
-    traveler.style[key] = (from[key] + (to[key] - from[key]) * t) + 'px';
+  if (active) {
+    const startTop = from.top + scrollY;
+    const endTop = innerHeight - 20 - to.height;
+    traveler.style.left = (from.left + (to.left - from.left) * t) + 'px';
+    traveler.style.top = (startTop + (endTop - startTop) * t) + 'px';
+    traveler.style.width = (from.width + (to.width - from.width) * t) + 'px';
+    traveler.style.height = (from.height + (to.height - from.height) * t) + 'px';
   }
+  const bounds = route.getBoundingClientRect();
+  const progress = Math.max(0, Math.min(1, (innerHeight * .7 - bounds.top) / bounds.height));
+  route.style.setProperty('--route', motion.matches ? 1 : progress);
+  for (const stop of stops) stop.classList.toggle('passed', stop.getBoundingClientRect().top + 38 < innerHeight * .7);
+  if (easedProgress !== target) schedulePortrait();
 }
+const route = document.querySelector('.resume-grid');
+const stops = Array.from(route.querySelectorAll('.resume-block'));
 function schedulePortrait() {
   if (!frame) frame = requestAnimationFrame(positionPortrait);
 }
@@ -776,5 +816,67 @@ addEventListener('resize', schedulePortrait);
 motion.addEventListener('change', schedulePortrait);
 new ResizeObserver(schedulePortrait).observe(document.querySelector('#about'));
 schedulePortrait();
+
+// The cover entrance restarts only after leaving and re-entering the hero.
+const heading = document.querySelector('.cover h1');
+let entered = true;
+new IntersectionObserver(([entry]) => {
+  if (!entry.isIntersecting) entered = false;
+  if (entry.intersectionRatio >= .4 && !entered) {
+    entered = true;
+    if (!motion.matches) heading.querySelectorAll('i').forEach((letter, i) =>
+      letter.animate([{transform:'translateY(115%)'}, {transform:'translateY(0)'}],
+        {duration:600, delay:(i % 7) * 35, easing:'cubic-bezier(.18,.74,.25,1)', fill:'backwards'}));
+  }
+}, {threshold:[0,.4]}).observe(heading);
+
+const reveal = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    reveal.unobserve(entry.target);
+    if (!motion.matches) entry.target.animate(
+      [{opacity:0, transform:'translateY(20px)'},{opacity:1, transform:'translateY(0)'}],
+      {duration:520,easing:'cubic-bezier(.2,.65,.25,1)'});
+  }
+}, {rootMargin:'0px 0px 24px 0px'});
+document.querySelectorAll('.hero-left,.stat-item,.section-title,.project-card,.resume-block,.card,.skills-grid,.contact-inner').forEach(el => {
+  if (el.getBoundingClientRect().top >= innerHeight) reveal.observe(el);
+});
+
+const links = Array.from(menu.querySelectorAll('a'));
+const sectionObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) if (entry.isIntersecting) {
+    for (const link of links) {
+      if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    }
+  }
+}, {rootMargin:'-15% 0px -65% 0px'});
+links.forEach(link => sectionObserver.observe(document.querySelector(link.hash)));
+
+const scene = document.querySelector('.closing-scene');
+const street = scene.querySelector('.street');
+const pause = scene.querySelector('button');
+let inView = false;
+function playScene() {
+  scene.classList.toggle('playing', inView && !document.hidden && !motion.matches && pause.getAttribute('aria-pressed') === 'false');
+}
+for (let i = 0; i < 17; i++) {
+  const person = document.createElement('span');
+  person.className = 'walker';
+  person.style.cssText = '--size:'+(14+i%4*5)+'px;--shade:'+(i%3?'#575650':'#272723')+';--speed:'+(19+i%5*3)+'s;--ground:'+(8+i%3*3)+'%;--offset:-'+(i*7.23)+'s';
+  person.append(document.createElement('i'));
+  street.append(person);
+}
+pause.addEventListener('click', () => {
+  const paused = pause.getAttribute('aria-pressed') === 'false';
+  pause.setAttribute('aria-pressed', String(paused));
+  pause.textContent = paused ? 'Resume motion' : 'Pause motion';
+  pause.setAttribute('aria-label', pause.textContent);
+  playScene();
+});
+new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; playScene(); }).observe(scene);
+document.addEventListener('visibilitychange', playScene);
+motion.addEventListener('change', playScene);
 </script></body>
 </html>
