@@ -344,28 +344,155 @@
       section { scroll-margin-top: 6rem; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    .intro {font: 550 clamp(2rem,4vw,4rem)/1.04 var(--display);letter-spacing:-.055em;margin:1rem 0;max-width:19ch}
+    .background summary, .project-card summary {cursor:pointer}
+    .background {order:1}
+    .background .hero-bio {margin-top:1rem}
+    .project-card {position:relative;border-radius:0 1rem 1rem 1rem;border-top:3px solid var(--signal)}
+    .project-card::before {content:"";position:absolute;top:-.55rem;left:-1px;width:4.5rem;height:.55rem;border-radius:.4rem .5rem 0 0;background:var(--signal)}
+    .project-card summary {display:grid;grid-template-columns:1fr auto;align-items:center;gap:.4rem 1rem;list-style:none}
+    summary::-webkit-details-marker {display:none}
+    .folder-title {font:600 clamp(1.4rem,3vw,2.4rem)/1.15 var(--display);letter-spacing:-.045em}
+    .folder-desc {grid-column:1;color:var(--ink-soft)}
+    .project-card summary::after {content:"+";grid-column:2;grid-row:1 / 3;font-size:2rem;color:var(--signal)}
+    .project-card[open] summary::after {content:"−"}
+    .project-card[open] summary {padding-bottom:1.25rem;margin-bottom:1.25rem;border-bottom:1px solid var(--line)}
+    summary:focus-visible {outline:3px solid var(--signal);outline-offset:5px}
+    @media (prefers-reduced-motion:no-preference){.hero-left {animation:appear .55s ease-out}.project-card[open] .project-desc{animation:appear .25s ease-out}@keyframes appear {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
+    @media(max-width:540px){nav{flex-wrap:wrap;row-gap:.25rem}.nav-links{flex-wrap:wrap}}
+
+:root {--paper:#f7f4f0;--paper-raised:#fffdf9;--ink:#161616;--ink-soft:#55534f;--ink-faint:#63615d;--line:#d4d0ca;--line-strong:#aaa59e;--signal:#262521;--signal-soft:#e5e1da;--mono:var(--display)}
+body {font-weight:400}
+nav {background:rgba(247,244,240,.92);border:none;padding:1.1rem 4vw;flex-flow:row nowrap}
+.menu-button,.cover-foot a {background:var(--ink);color:white;border:0;border-radius:99px;padding:.65rem 1.15rem;font:500 .9rem var(--display);cursor:pointer;text-decoration:none}
+.menu-button span {margin-left:.5rem}
+dialog {inset:0 0 auto auto;width:min(30rem,100%);max-width:100%;border:0;background:var(--ink);color:var(--paper);padding:2rem;box-shadow:0 12px 45px #0003}
+dialog::backdrop {background:#12121266}
+dialog form {text-align:right}
+dialog button {outline:1px solid #aaa}
+.menu-links {list-style:none;margin:2rem 0}
+.menu-links a {display:block;padding:.45rem 0;border-bottom:1px solid #555;text-decoration:none;font:600 clamp(2rem,6vw,4rem)/1.2 var(--display);letter-spacing:-.06em}
+.cover {height:100svh;min-height:34rem;max-height:65rem;position:relative;display:grid;align-content:center;justify-items:center;padding:4rem 1rem 5rem;isolation:isolate}
+.cover h1 {position:relative;z-index:1;pointer-events:none;text-align:center;font:700 min(15vw,17svh)/.79 var(--display);letter-spacing:-.085em}
+.cover-art {width:min(38vw,36svh,24rem);aspect-ratio:1.08;position:relative;display:block;margin-top:-.45rem;transform:rotate(-4deg);background:#282724;border:7px solid #282724;border-radius:.6rem;box-shadow:0 18px 24px #17161526;overflow:hidden}
+.cover-art img {width:100%;height:100%;object-fit:cover;object-position:15% center;filter:grayscale(1) contrast(1.15)}
+.cover-art span {position:absolute;bottom:0;left:0;right:0;background:#282724;color:#fff;padding:.45rem;font:500 .68rem var(--display);letter-spacing:.07em}
+.cover-foot {position:absolute;bottom:2rem;left:4vw;right:4vw;display:flex;align-items:end;justify-content:space-between}
+.cover-foot strong,.contact-heading {font:600 clamp(2rem,5vw,5rem)/1 var(--display);letter-spacing:-.07em}
+section {max-width:1320px;padding-inline:5vw}
+#about {min-height:auto;border-top:1px solid var(--line);padding-block:7rem}
+.section-title,.hero-name {font:650 clamp(2.8rem,6.5vw,6rem)/.98 var(--display);letter-spacing:-.075em}
+.field-label::before {display:none}
+.btn,.skill-tag {border-radius:99px}
+.folders {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.8rem 1.6rem;margin-top:3rem;align-items:start}
+.project-card {border:1px solid #aaa69e;border-radius:0 .85rem .85rem .85rem;background:#e6e2db;padding:clamp(1.1rem,2vw,2rem)}
+.project-card:nth-child(2n) {background:#d7d6d1}
+.project-card::before {width:32%;height:.95rem;top:-.99rem;background:inherit;border:1px solid #aaa69e;border-bottom:none;border-radius:.55rem 1rem 0 0}
+.project-card summary {min-height:12rem;align-content:end;position:relative}
+.project-card summary::after {border:1px solid #9e9a92;border-radius:50%;width:2rem;height:2rem;display:grid;place-items:center;font:400 1.4rem/1 var(--display)}
+.project-card[open] {grid-column:1/-1}
+.project-card[open] summary {min-height:5rem}
+@media(prefers-reduced-motion:no-preference){.cover-art,.project-card {transition:transform .3s ease,box-shadow .3s ease}.cover-art:hover {transform:rotate(0) scale(1.025)}.project-card:not([open]):hover {transform:translateY(-4px);box-shadow:0 10px 15px #2221}}
+@media(max-width:700px){.folders{grid-template-columns:1fr}.cover-art{width:min(62vw,32svh)}.cover-foot{align-items:center}.project-card summary{min-height:9rem}#about{padding-block:4rem}}
+
+.portrait-slot,.bio-slot,.travel-photo {display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 25% 10%,#a4a29b,transparent 58%),linear-gradient(135deg,#6b6964,#242423);color:#f7f4f0;border-radius:9px}
+.portrait-slot {width:min(48vw,32svh);aspect-ratio:20/23;margin-top:-.8rem;text-decoration:none}
+.bio-slot {width:min(100%,12rem);aspect-ratio:20/23}
+.portrait-mark {font:500 clamp(2.2rem,8vw,8rem)/1 var(--display);letter-spacing:-.12em;transform:translateX(-.06em)}
+.bio-slot .portrait-mark {font-size:4rem}
+.travel-photo {position:fixed;pointer-events:none;z-index:4;transform-origin:0 0}
+.travel-photo[hidden]{display:none}
+.photo-in-motion .portrait-slot,.photo-in-motion .bio-slot {opacity:0}
+.portrait-slot img,.bio-slot img,.travel-photo img {width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.cover h1 {z-index:5}
+.letter-mask {display:inline-block;overflow:clip;padding:.06em .035em;margin:-.06em -.035em}
+.letter-mask i {display:inline-block;font-style:normal}
+#site-menu {width:100%;max-height:100svh;padding:clamp(1.2rem,5vw,5rem);background:var(--paper);color:var(--ink)}
+#site-menu .menu-links {max-width:64rem;margin:1rem auto}
+.menu-links a {border-color:var(--line);transition:padding-left .2s}
+.menu-links a:is(:hover,:focus-visible) {padding-left:.35em}
+body:has(dialog[open]) {overflow:hidden}
+.folders {gap:3.8rem 2.2rem}
+.project-card {background:transparent!important;border:0;box-shadow:none!important;padding:0;transform:none!important}
+.project-card::before {display:none}
+.project-card summary {display:grid;isolation:isolate;perspective:700px;padding:3rem 1.3rem 1.35rem;margin-top:3rem;align-content:end;min-height:12rem}
+.project-card summary::before {content:"";position:absolute;inset:0;background:#e5e2dc;border:1px solid #aaa69e;border-radius:0 .8rem .8rem .8rem;z-index:-1;transform-origin:bottom;transition:transform .4s}
+.paper-stack {position:absolute;inset:0;z-index:-2;background:#c8c5bd;border-radius:.6rem}
+.paper-stack::before {content:"";position:absolute;top:-1rem;width:40%;height:1.5rem;border-radius:.65rem .9rem 0 0;background:#c8c5bd}
+.paper-stack i {position:absolute;inset:0 9% 15%;border-radius:.45rem;border:1px solid #bab6af;background:repeating-linear-gradient(to bottom,#f9f7f2 0 14px,#d3d1ca 15px 16px);transform:translateY(-.7rem) rotate(-4deg);transition:transform .4s}
+.paper-stack i+i {background:#f3f0e9;transform:translateY(-.35rem) rotate(3deg)}
+.project-card summary:is(:hover,:focus-visible)::before,.project-card[open] summary::before {transform:rotateX(-12deg)}
+.project-card summary:is(:hover,:focus-visible) i:first-child,.project-card[open] .paper-stack i:first-child {transform:translateY(-2.3rem) rotate(-8deg)}
+.project-card summary:is(:hover,:focus-visible) i+i,.project-card[open] .paper-stack i+i {transform:translateY(-1.7rem) rotate(5deg)}
+.project-card[open] summary {min-height:11rem}
+.project-card[open] .project-desc {max-width:75ch}
+@media(prefers-reduced-motion:no-preference){
+.letter-mask i {animation:letter-in .65s cubic-bezier(.18,.74,.25,1) backwards;animation-delay:calc(var(--i)*35ms)}
+#site-menu[open] {animation:menu-in .3s ease-out}
+@keyframes letter-in {from{transform:translateY(120%)}}
+@keyframes menu-in {from{opacity:0;transform:translateY(-2rem)}}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}}
+
+.resume-grid {position:relative;padding-left:clamp(1.5rem,4vw,3rem)}
+.resume-grid::before,.resume-grid::after {content:"";position:absolute;left:4px;top:0;bottom:0;width:2px;background:var(--line)}
+.resume-grid::after {background:var(--ink);transform-origin:top;transform:scaleY(var(--route,1))}
+.resume-block {position:relative}
+.resume-block::before {content:"";position:absolute;top:2.35rem;left:calc(0px - clamp(1.5rem,4vw,3rem));width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);background:var(--paper);z-index:1}
+.resume-block.passed::before {background:var(--ink)}
+.menu-links [aria-current="location"] {text-decoration:underline;text-underline-offset:.12em}
+@supports (animation-timeline:scroll()) {
+  @media(prefers-reduced-motion:no-preference){
+    nav::after {content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--ink);transform-origin:left;animation:read-page linear both;animation-timeline:scroll(root block)}
+    @keyframes read-page {from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  }
+}
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-group(*) {animation-duration:.36s;animation-timing-function:cubic-bezier(.2,.75,.25,1)}
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+}
+
+.portrait-slot img,.bio-slot img,.travel-photo img{object-position:50% 43%;filter:saturate(.8)}
+#pittsburgh {--split:22%;max-width:none;padding:0;background:#102f40;color:#f4efe4;position:relative;min-height:145svh;scroll-margin:0}
+.campus-stage {position:sticky;top:0;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center;gap:5vw;padding:5rem 8vw 3rem;background-image:linear-gradient(#a8cecd10 1px,transparent 1px),linear-gradient(90deg,#a8cecd10 1px,transparent 1px);background-size:40px 40px}
+.campus-copy p:first-child,.campus-copy label,.campus-print figcaption,.signal-demo>p{font:500 .76rem/1.4 var(--mono);letter-spacing:.06em}
+.campus-copy h2{font:550 clamp(3.3rem,7.5vw,8rem)/.89 var(--display);letter-spacing:-.075em;margin:1.2rem 0}
+.campus-copy em{font:italic .95em Georgia,serif;letter-spacing:-.07em;color:#edc780}
+.campus-copy p{max-width:38ch}.campus-copy label{display:block;margin:2rem 0 .25rem}.campus-copy input{width:min(100%,20rem);accent-color:#edc780;height:32px;display:block}.campus-copy>a{display:inline-block;margin-top:1rem}
+.campus-print {width:min(100%,44svh);aspect-ratio:987/1611;position:relative;justify-self:center;box-shadow:0 1.4rem 4rem #00151d66}
+.campus-print img{width:100%;height:100%;position:absolute;inset:0}.campus-print .develop{clip-path:inset(0 calc(100% - var(--split)) 0 0)}
+.campus-print i{position:absolute;left:clamp(0px,var(--split),calc(100% - 2px));top:0;bottom:0;border-left:2px solid #ffe1a2}
+.campus-print figcaption{position:absolute;bottom:.5rem;left:.5rem;background:#102f40ee;padding:.25rem .45rem;color:white;font-size:.62rem}
+.signal-demo{padding:1.2rem;background:#112f3e;color:white;border-radius:.65rem;margin:1rem 0 2rem}.signal-demo button{background:#f3ce85;color:#132f40;padding:.6rem 1rem;border:0;border-radius:99px;margin:.6rem 0;cursor:pointer}.signal-demo ol{display:flex;gap:.65rem;list-style:none;flex-wrap:wrap}.signal-demo li{padding:.45rem .7rem;border:1px solid #70919f;border-radius:.35rem}.signal-demo li.active{background:#f1ce86;color:#132f40}.signal-demo output{display:block;min-height:1.7em;margin-top:.5rem}
+@media(max-width:700px){.campus-stage{grid-template-columns:1fr;align-content:center;gap:1rem;padding:4rem 6vw 1.2rem}.campus-copy h2{font-size:clamp(2.4rem,10vw,4rem);margin:.45rem 0}.campus-copy h2 br{display:none}.campus-copy h2 em::before{content:' '}.campus-copy label{margin:.6rem 0 0}.campus-copy>a{margin:.25rem 0}.campus-print{width:auto;height:min(40svh,85vw);max-width:100%}}
+@media(max-height:640px),(prefers-reduced-motion:reduce){#pittsburgh{min-height:0}.campus-stage{position:relative}}
 </style>
 </head>
 <body>
-<nav>
+<nav aria-label="Main navigation">
 <a class="nav-logo" href="#about">Kapil Sharma</a>
-<ul class="nav-links"><li><a href="#projects">Projects</a></li><li><a href="#resume">Experience</a></li><li><a href="#analysis">Analysis</a></li><li><a href="#contact">Contact</a></li></ul>
-</nav>
+<button class="menu-button" aria-haspopup="dialog" onclick="document.getElementById('site-menu').showModal()">Menu <span aria-hidden="true">☰</span></button>
+</nav><dialog id="site-menu" aria-label="Site menu"><form method="dialog"><button class="menu-button">Close ×</button></form><ul class="menu-links"><li><a href="#about">About</a></li><li><a href="#pittsburgh">Pittsburgh</a></li><li><a href="#projects">Projects</a></li><li><a href="#resume">Experience</a></li><li><a href="#analysis">Analysis</a></li><li><a href="#contact">Contact</a></li></ul></dialog>
+<header class="cover">
+<h1 aria-label="Product builder"><span class="letter-mask" aria-hidden="true"><i style="--i:0">P</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:1">R</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:2">O</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:3">D</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:4">U</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:5">C</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:6">T</i></span><br><span class="letter-mask" aria-hidden="true"><i style="--i:0">B</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:1">U</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:2">I</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:3">L</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:4">D</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:5">E</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:6">R</i></span></h1>
+<a class="portrait-slot" href="#about" aria-label="Read about Kapil Sharma"><img src="assets/kapil.webp" alt="Kapil Sharma"></a>
+<div class="cover-foot"><strong>Kapil Sharma</strong><a href="#pittsburgh">Explore my Pittsburgh ↓</a></div>
+</header>
 <!-- ABOUT -->
 <section id="about">
 <div class="hero-left">
 <div class="field-label">founder · product builder · healthcare operator</div>
-<h1 class="hero-name">Kapil Sharma</h1>
-<div class="hero-bio"><p>I notice problems, work through the details, and build something people can use. I founded <strong>Whis LLC</strong> and built <strong>Omni Prospect</strong> to help manufacturers connect their internal data with outside intelligence and identify business opportunities.</p>
-<p>Before Whis, I worked in healthcare consulting, analyzing claims and evaluating regulatory requirements for an AI telehealth company entering U.S. markets. I now also work as a psychiatric aide, where I built <strong>EMPATH</strong> after seeing how staffing and scheduling problems affected the people on my unit.</p>
-<p>I'm interested in building healthcare businesses from the ground up: understanding the opportunity, testing the assumptions, and doing the work to turn an idea into a useful product.</p></div>
-<div class="hero-actions">
+<h2 class="hero-name">Hi, I’m Kapil.</h2>
+<p class="intro">I build software for the problems I see at work.</p><p class="hero-bio">At Whis, I connect manufacturing data with commercial intelligence. On my psychiatric unit, I built a scheduling tool around the people working the shifts.</p><div class="hero-actions">
 <a class="btn btn-primary" href="#projects">See What I've Built</a>
-<a class="btn btn-outline" href="#resume">View Resume</a>
+<a class="btn btn-outline" href="KapilSharma_Resume_.pdf">View résumé PDF</a>
 <a class="btn btn-outline" href="mailto:sharmak2517@gmail.com">Get in Touch</a>
 </div>
 </div>
-<div class="hero-right">
+<div class="hero-right"><div class="bio-slot" aria-hidden="true"><img src="assets/kapil.webp" alt="Kapil Sharma"></div><details class="background"><summary>My background</summary><div class="hero-bio"><p>I notice problems, work through the details, and build something people can use. I founded <strong>Whis LLC</strong> and built <strong>Omni Prospect</strong> to help manufacturers connect their internal data with outside intelligence and identify business opportunities.</p>
+<p>Before Whis, I worked in healthcare consulting, analyzing claims and evaluating regulatory requirements for an AI telehealth company entering U.S. markets. I now also work as a psychiatric aide, where I built <strong>EMPATH</strong> after seeing how staffing and scheduling problems affected the people on my unit.</p>
+<p>I'm interested in building healthcare businesses from the ground up: understanding the opportunity, testing the assumptions, and doing the work to turn an idea into a useful product.</p></div>
+</details>
 <div class="stat-item">
 <div class="stat-number">Founder</div>
 <div class="stat-label">Whis LLC, since May 2026</div>
@@ -387,11 +514,20 @@
 <div class="stat-label">Psychology, University of Pittsburgh</div>
 </div>
 </div>
-</section><section id="projects">
+</section><section id="pittsburgh" aria-labelledby="campus-title">
+<div class="campus-stage"><div class="campus-copy"><p>University of Pittsburgh · Oakland</p>
+<h2 id="campus-title">Cathedral<br><em>of Learning.</em></h2>
+<p>The Cathedral is the building I associate with my education at Pitt.</p>
+<label for="campus-dial">Drag to develop the photograph</label>
+<input id="campus-dial" type="range" min="0" max="100" value="22" aria-label="Amount of the Cathedral photograph revealed">
+<a href="#projects">Explore my projects ↓</a></div>
+<figure class="campus-print"><img src="assets/cathedral-etch.webp" alt=""><img class="develop" src="assets/cathedral.webp" alt="The stepped Gothic tower of the Cathedral of Learning in Oakland"><i aria-hidden="true"></i>
+<figcaption>Oakland, Pittsburgh · <a href="https://commons.wikimedia.org/wiki/File:Cathedral_of_learning_pittsburgh.jpg">Photograph by PerryPlanet</a></figcaption></figure>
+</div></section><section id="projects">
 <div class="field-label">things I've built</div>
 <h2 class="section-title">Projects</h2>
-<div style="margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem;">
-<div class="project-card">
+<div class="folders">
+<details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Omni Prospect · Whis LLC</span><span class="folder-desc">Match public contract signals to a manufacturer’s customer and order history.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -401,23 +537,22 @@
 <span class="skill-tag">PostgreSQL</span>
 <span class="skill-tag">Google Cloud</span>
 </div>
-<h3 class="project-title">Omni Prospect · Whis LLC</h3>
+
 </div>
 <div class="card-status">Client-approved for production use</div>
 </div>
-<div class="project-desc"><p><strong>The problem.</strong> Manufacturers have useful information spread across customer records, orders, quotes, and public announcements. Those sources do not use the same names or identifiers. An opportunity is only useful if it can be connected to the right customer and the right capability.</p>
+<div class="signal-demo"><p>Omni Prospect · illustrative workflow</p><button type="button" id="step-signal">Trace a signal →</button><ol><li>Public award notice</li><li>Customer and business unit matched</li><li>Opportunity scored for review</li></ol><output aria-live="polite"></output></div><div class="project-desc"><p><strong>The problem.</strong> Manufacturers have useful information spread across customer records, orders, quotes, and public announcements. Those sources do not use the same names or identifiers. An opportunity is only useful if it can be connected to the right customer and the right capability.</p>
 <p><strong>What I built.</strong> Omni Prospect brings internal ERP, CRM, and quoting data together with government contract announcements and industry research. I own product design, architecture, development, and implementation with the client's technical and commercial teams.</p>
 <p><strong>The hardest part was the data.</strong> I designed a BigQuery gold layer with a consistent naming system for customers, sites, and business units, backed by explicit matching rules. A separate, deterministic scoring process ranks opportunities; LLM-assisted research explains the supporting evidence and leaves uncertain associations for human review.</p>
 <p><strong>Delivery.</strong> Built with React, TypeScript, FastAPI, PostgreSQL, and Docker, with deployment and data integration in the client's Google Cloud environment. Approved by the client for production use.</p></div>
 <div class="project-links">
 <span class="card-status" style="border: 1px solid var(--line); padding: 0.5rem 1rem;">Private client platform, not publicly viewable</span>
 </div>
-</div>
-<div class="project-card">
+</details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">EMPATH Unit Clinical Staffing &amp; Operations Platform</span><span class="folder-desc">Coordinate staffing requests and track scheduling equity on a psychiatric unit.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags"><span class="skill-tag">Nurse Scheduling</span><span class="skill-tag">Scheduling Equity</span><span class="skill-tag">Operational Analytics</span></div>
-<h3 class="project-title">EMPATH Unit Clinical Staffing &amp; Operations Platform</h3>
+
 </div>
 <div class="card-status">Interactive demonstration · Synthetic unit data</div>
 </div>
@@ -430,8 +565,7 @@
 <div class="card-status" style="margin-top: 0.5rem;">Public demonstration with fictional staff and synthetic aggregate unit totals. No patient records or hospital results are shown.</div>
 </div>
 </div>
-<div class="project-links"><a class="btn btn-primary" href="https://kas1172-dotcom.github.io/empath-scheduler/" rel="noopener noreferrer" target="_blank">Explore EMPATH Demo</a><a class="btn btn-outline" href="https://github.com/kas1172-dotcom/empath-scheduler" rel="noopener noreferrer" target="_blank">Code &amp; Metric Definitions</a></div></div>
-<div class="project-card">
+<div class="project-links"><a class="btn btn-primary" href="https://kas1172-dotcom.github.io/empath-scheduler/" rel="noopener noreferrer" target="_blank">Explore EMPATH Demo</a><a class="btn btn-outline" href="https://github.com/kas1172-dotcom/empath-scheduler" rel="noopener noreferrer" target="_blank">Code &amp; Metric Definitions</a></div></details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Healthcare Regulatory &amp; Policy Monitor</span><span class="folder-desc">Turn regulatory updates into weekly briefings for healthcare teams.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -440,7 +574,7 @@
 <span class="skill-tag">GitHub Actions</span>
 <span class="skill-tag">Static Site</span>
 </div>
-<h3 class="project-title">Healthcare Regulatory &amp; Policy Monitor</h3>
+
 </div>
 <div class="card-status"><span class="status-dot live"></span> Live · Weekly</div>
 </div>
@@ -452,8 +586,7 @@
 <a class="btn btn-primary" href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/" rel="noopener noreferrer" target="_blank">View Live Dashboard</a>
 <a class="btn btn-outline" href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/how-it-works.html" rel="noopener noreferrer" target="_blank">How It Works</a>
 </div>
-</div>
-<div class="project-card">
+</details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Medicaid Financing Workbench</span><span class="folder-desc">Explore Medicaid financing through public federal datasets.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -462,7 +595,7 @@
 <span class="skill-tag">Public Federal Datasets</span>
 <span class="skill-tag">Static Dashboard</span>
 </div>
-<h3 class="project-title">Medicaid Financing Workbench</h3>
+
 </div>
 <div class="card-status"><span class="status-dot live"></span> Personal Project</div>
 </div>
@@ -474,9 +607,8 @@
 <a class="btn btn-primary" href="https://kas1172-dotcom.github.io/medicaid-financing-workbench/" rel="noopener noreferrer" target="_blank">View Live Dashboard</a>
 <a class="btn btn-outline" href="https://github.com/kas1172-dotcom/medicaid-financing-workbench" rel="noopener noreferrer" target="_blank">View on GitHub</a>
 </div>
-</div>
-</div>
-</section>
+</details>
+</div></section>
 <!-- RESUME -->
 <section id="resume">
 <div class="resume-header">
@@ -643,9 +775,147 @@
 </div>
 </section>
 <!-- FOOTER -->
+
 <footer>
 <span class="footer-name">Kapil Sharma</span>
 <span class="footer-note">Pittsburgh, PA · Founder, Whis LLC</span>
 </footer>
-</body>
+<script>
+const menu = document.getElementById('site-menu');
+menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.close()));
+menu.addEventListener('click', event => { if (event.target === menu) menu.close(); });
+
+// Carry one portrait between its two layout positions as the visitor scrolls.
+const source = document.querySelector('.portrait-slot');
+const destination = document.querySelector('.bio-slot');
+const traveler = document.createElement('div');
+traveler.className = 'travel-photo';
+traveler.setAttribute('aria-hidden', 'true');
+traveler.hidden = true;
+traveler.innerHTML = source.innerHTML;
+document.body.append(traveler);
+const motion = matchMedia('(prefers-reduced-motion: reduce)');
+let frame = 0;
+let easedProgress;
+function positionPortrait(time) {
+  frame = 0;
+  const from = source.getBoundingClientRect();
+  const to = destination.getBoundingClientRect();
+  // The moving portrait lands when its biography slot reaches the lower edge.
+  const end = Math.max(1, scrollY + to.bottom - innerHeight + 20);
+  const target = Math.max(0, Math.min(1, scrollY / end));
+  const previous = positionPortrait.lastTime || time;
+  positionPortrait.lastTime = time;
+  const elapsed = Math.max(12, Math.min(100, time - previous));
+  if (easedProgress === undefined || motion.matches) easedProgress = target;
+  easedProgress += (target - easedProgress) * (1 - Math.exp(-elapsed / 65));
+  if (Math.abs(target - easedProgress) < .001) easedProgress = target;
+  const t = easedProgress;
+  const active = !motion.matches && t > 0 && t < 1 && to.bottom > 0;
+  document.body.classList.toggle('photo-in-motion', active);
+  traveler.hidden = !active;
+  if (active) {
+    const startTop = from.top + scrollY;
+    const endTop = innerHeight - 20 - to.height;
+    traveler.style.left = (from.left + (to.left - from.left) * t) + 'px';
+    traveler.style.top = (startTop + (endTop - startTop) * t) + 'px';
+    traveler.style.width = (from.width + (to.width - from.width) * t) + 'px';
+    traveler.style.height = (from.height + (to.height - from.height) * t) + 'px';
+  }
+  const bounds = route.getBoundingClientRect();
+  const progress = Math.max(0, Math.min(1, (innerHeight * .7 - bounds.top) / bounds.height));
+  route.style.setProperty('--route', motion.matches ? 1 : progress);
+  for (const stop of stops) stop.classList.toggle('passed', stop.getBoundingClientRect().top + 38 < innerHeight * .7);
+  if (easedProgress !== target) schedulePortrait();
+}
+const route = document.querySelector('.resume-grid');
+const stops = Array.from(route.querySelectorAll('.resume-block'));
+function schedulePortrait() {
+  if (!frame) frame = requestAnimationFrame(positionPortrait);
+}
+addEventListener('scroll', schedulePortrait, {passive:true});
+addEventListener('resize', schedulePortrait);
+motion.addEventListener('change', schedulePortrait);
+new ResizeObserver(schedulePortrait).observe(document.querySelector('#about'));
+schedulePortrait();
+
+// The cover entrance restarts only after leaving and re-entering the hero.
+const heading = document.querySelector('.cover h1');
+let entered = true;
+new IntersectionObserver(([entry]) => {
+  if (!entry.isIntersecting) entered = false;
+  if (entry.intersectionRatio >= .4 && !entered) {
+    entered = true;
+    if (!motion.matches) heading.querySelectorAll('i').forEach((letter, i) =>
+      letter.animate([{transform:'translateY(115%)'}, {transform:'translateY(0)'}],
+        {duration:600, delay:(i % 7) * 35, easing:'cubic-bezier(.18,.74,.25,1)', fill:'backwards'}));
+  }
+}, {threshold:[0,.4]}).observe(heading);
+
+const reveal = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    reveal.unobserve(entry.target);
+    if (!motion.matches) entry.target.animate(
+      [{opacity:0, transform:'translateY(20px)'},{opacity:1, transform:'translateY(0)'}],
+      {duration:520,easing:'cubic-bezier(.2,.65,.25,1)'});
+  }
+}, {rootMargin:'0px 0px 24px 0px'});
+document.querySelectorAll('.hero-left,.stat-item,.section-title,.project-card,.resume-block,.card,.skills-grid,.contact-inner').forEach(el => {
+  if (el.getBoundingClientRect().top >= innerHeight) reveal.observe(el);
+});
+
+const links = Array.from(menu.querySelectorAll('a'));
+const sectionObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) if (entry.isIntersecting) {
+    for (const link of links) {
+      if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    }
+  }
+}, {rootMargin:'-15% 0px -65% 0px'});
+links.forEach(link => sectionObserver.observe(document.querySelector(link.hash)));
+
+// Give each title a stable identity as its folder moves between grid and case study.
+const projectFolders = document.querySelectorAll('details.project-card');
+projectFolders.forEach((folder, index) => {
+  const summary = folder.querySelector('summary');
+  const title = summary.querySelector('.folder-title');
+  title.style.viewTransitionName = 'case-title-' + index;
+  summary.addEventListener('click', event => {
+    if (motion.matches || !document.startViewTransition) return;
+    event.preventDefault();
+    document.startViewTransition(() => { folder.open = !folder.open; });
+  });
+});
+
+const campus = document.querySelector('#pittsburgh');
+const dial = document.querySelector('#campus-dial');
+let manual = false;
+function expose(value) {
+  dial.value = value;
+  campus.style.setProperty('--split', dial.value + '%');
+}
+dial.addEventListener('input', () => { manual = true; expose(dial.value); });
+function developOnScroll() {
+  if (manual || motion.matches) return;
+  const rect = campus.getBoundingClientRect();
+  const travel = rect.height - innerHeight;
+  if (travel > 0) expose(Math.round(22 + 78 * Math.max(0, Math.min(1, -rect.top / travel))));
+}
+addEventListener('scroll', developOnScroll, {passive:true});
+addEventListener('resize', developOnScroll);
+developOnScroll();
+const trace = document.querySelector('.signal-demo');
+const traceSteps = Array.from(trace.querySelectorAll('li'));
+const explanations = ['An award notice enters the research feed.', 'Matching rules connect the notice to an internal customer record.', 'A deterministic rubric ranks the opportunity for a seller.'];
+let selected = -1;
+trace.querySelector('button').addEventListener('click', event => {
+ selected = (selected + 1) % traceSteps.length;
+ traceSteps.forEach((step,index) => step.classList.toggle('active',index === selected));
+ if (!motion.matches) traceSteps[selected].animate([{transform:'translateY(5px)',opacity:.5},{transform:'translateY(0)',opacity:1}],{duration:360});
+ trace.querySelector('output').textContent = explanations[selected];
+ event.currentTarget.textContent = ['Match customer →','Score opportunity →','Replay signal ↻'][selected];
+});
+</script></body>
 </html>
