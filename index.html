@@ -394,16 +394,55 @@ section {max-width:1320px;padding-inline:5vw}
 .project-card[open] summary {min-height:5rem}
 @media(prefers-reduced-motion:no-preference){.cover-art,.project-card {transition:transform .3s ease,box-shadow .3s ease}.cover-art:hover {transform:rotate(0) scale(1.025)}.project-card:not([open]):hover {transform:translateY(-4px);box-shadow:0 10px 15px #2221}}
 @media(max-width:700px){.folders{grid-template-columns:1fr}.cover-art{width:min(62vw,32svh)}.cover-foot{align-items:center}.project-card summary{min-height:9rem}#about{padding-block:4rem}}
+
+.portrait-slot,.bio-slot,.travel-photo {display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 25% 10%,#a4a29b,transparent 58%),linear-gradient(135deg,#6b6964,#242423);color:#f7f4f0;border-radius:9px}
+.portrait-slot {width:min(48vw,32svh);aspect-ratio:20/23;margin-top:-.8rem;text-decoration:none}
+.bio-slot {width:min(100%,12rem);aspect-ratio:20/23}
+.portrait-mark {font:500 clamp(2.2rem,8vw,8rem)/1 var(--display);letter-spacing:-.12em;transform:translateX(-.06em)}
+.bio-slot .portrait-mark {font-size:4rem}
+.travel-photo {position:fixed;pointer-events:none;z-index:4;transform-origin:0 0}
+.travel-photo[hidden]{display:none}
+.photo-in-motion .portrait-slot,.photo-in-motion .bio-slot {opacity:0}
+.portrait-slot img,.bio-slot img,.travel-photo img {width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.cover h1 {z-index:5}
+.letter-mask {display:inline-block;overflow:clip;padding:.06em .035em;margin:-.06em -.035em}
+.letter-mask i {display:inline-block;font-style:normal}
+#site-menu {width:100%;max-height:100svh;padding:clamp(1.2rem,5vw,5rem);background:var(--paper);color:var(--ink)}
+#site-menu .menu-links {max-width:64rem;margin:1rem auto}
+.menu-links a {border-color:var(--line);transition:padding-left .2s}
+.menu-links a:is(:hover,:focus-visible) {padding-left:.35em}
+body:has(dialog[open]) {overflow:hidden}
+.folders {gap:3.8rem 2.2rem}
+.project-card {background:transparent!important;border:0;box-shadow:none!important;padding:0;transform:none!important}
+.project-card::before {display:none}
+.project-card summary {display:grid;isolation:isolate;perspective:700px;padding:3rem 1.3rem 1.35rem;margin-top:3rem;align-content:end;min-height:12rem}
+.project-card summary::before {content:"";position:absolute;inset:0;background:#e5e2dc;border:1px solid #aaa69e;border-radius:0 .8rem .8rem .8rem;z-index:-1;transform-origin:bottom;transition:transform .4s}
+.paper-stack {position:absolute;inset:0;z-index:-2;background:#c8c5bd;border-radius:.6rem}
+.paper-stack::before {content:"";position:absolute;top:-1rem;width:40%;height:1.5rem;border-radius:.65rem .9rem 0 0;background:#c8c5bd}
+.paper-stack i {position:absolute;inset:0 9% 15%;border-radius:.45rem;border:1px solid #bab6af;background:repeating-linear-gradient(to bottom,#f9f7f2 0 14px,#d3d1ca 15px 16px);transform:translateY(-.7rem) rotate(-4deg);transition:transform .4s}
+.paper-stack i+i {background:#f3f0e9;transform:translateY(-.35rem) rotate(3deg)}
+.project-card summary:is(:hover,:focus-visible)::before,.project-card[open] summary::before {transform:rotateX(-12deg)}
+.project-card summary:is(:hover,:focus-visible) i:first-child,.project-card[open] .paper-stack i:first-child {transform:translateY(-2.3rem) rotate(-8deg)}
+.project-card summary:is(:hover,:focus-visible) i+i,.project-card[open] .paper-stack i+i {transform:translateY(-1.7rem) rotate(5deg)}
+.project-card[open] summary {min-height:11rem}
+.project-card[open] .project-desc {max-width:75ch}
+@media(prefers-reduced-motion:no-preference){
+.letter-mask i {animation:letter-in .65s cubic-bezier(.18,.74,.25,1) backwards;animation-delay:calc(var(--i)*35ms)}
+#site-menu[open] {animation:menu-in .3s ease-out}
+@keyframes letter-in {from{transform:translateY(120%)}}
+@keyframes menu-in {from{opacity:0;transform:translateY(-2rem)}}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}}
 </style>
 </head>
 <body>
 <nav aria-label="Main navigation">
 <a class="nav-logo" href="#about">Kapil Sharma</a>
 <button class="menu-button" aria-haspopup="dialog" onclick="document.getElementById('site-menu').showModal()">Menu <span aria-hidden="true">☰</span></button>
-</nav><dialog id="site-menu" aria-label="Site menu"><form method="dialog"><button class="menu-button">Close ×</button></form><ul class="menu-links"><li><a href="#projects">Projects</a></li><li><a href="#resume">Experience</a></li><li><a href="#analysis">Analysis</a></li><li><a href="#contact">Contact</a></li></ul></dialog>
+</nav><dialog id="site-menu" aria-label="Site menu"><form method="dialog"><button class="menu-button">Close ×</button></form><ul class="menu-links"><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#resume">Experience</a></li><li><a href="#analysis">Analysis</a></li><li><a href="#contact">Contact</a></li></ul></dialog>
 <header class="cover">
-<h1>PRODUCT<br>BUILDER</h1>
-<a class="cover-art" href="#projects" aria-label="Explore Kapil’s projects"><img src="screenshots/empath/operations.png" alt=""><span>EMPATH / UNIT OPERATIONS ↗</span></a>
+<h1 aria-label="Product builder"><span class="letter-mask" aria-hidden="true"><i style="--i:0">P</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:1">R</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:2">O</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:3">D</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:4">U</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:5">C</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:6">T</i></span><br><span class="letter-mask" aria-hidden="true"><i style="--i:0">B</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:1">U</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:2">I</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:3">L</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:4">D</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:5">E</i></span><span class="letter-mask" aria-hidden="true"><i style="--i:6">R</i></span></h1>
+<a class="portrait-slot" href="#about" aria-label="Read about Kapil Sharma"><span class="portrait-mark" aria-hidden="true">KS</span></a>
 <div class="cover-foot"><strong>Kapil Sharma</strong><a href="#about">Meet Kapil ↓</a></div>
 </header>
 <!-- ABOUT -->
@@ -417,7 +456,7 @@ section {max-width:1320px;padding-inline:5vw}
 <a class="btn btn-outline" href="mailto:sharmak2517@gmail.com">Get in Touch</a>
 </div>
 </div>
-<div class="hero-right"><details class="background"><summary>My background</summary><div class="hero-bio"><p>I notice problems, work through the details, and build something people can use. I founded <strong>Whis LLC</strong> and built <strong>Omni Prospect</strong> to help manufacturers connect their internal data with outside intelligence and identify business opportunities.</p>
+<div class="hero-right"><div class="bio-slot" aria-hidden="true"><span class="portrait-mark" aria-hidden="true">KS</span></div><details class="background"><summary>My background</summary><div class="hero-bio"><p>I notice problems, work through the details, and build something people can use. I founded <strong>Whis LLC</strong> and built <strong>Omni Prospect</strong> to help manufacturers connect their internal data with outside intelligence and identify business opportunities.</p>
 <p>Before Whis, I worked in healthcare consulting, analyzing claims and evaluating regulatory requirements for an AI telehealth company entering U.S. markets. I now also work as a psychiatric aide, where I built <strong>EMPATH</strong> after seeing how staffing and scheduling problems affected the people on my unit.</p>
 <p>I'm interested in building healthcare businesses from the ground up: understanding the opportunity, testing the assumptions, and doing the work to turn an idea into a useful product.</p></div>
 </details>
@@ -446,7 +485,7 @@ section {max-width:1320px;padding-inline:5vw}
 <div class="field-label">things I've built</div>
 <h2 class="section-title">Projects</h2>
 <div class="folders">
-<details class="project-card"><summary><span class="folder-title">Omni Prospect · Whis LLC</span><span class="folder-desc">Match public contract signals to a manufacturer’s customer and order history.</span></summary>
+<details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Omni Prospect · Whis LLC</span><span class="folder-desc">Match public contract signals to a manufacturer’s customer and order history.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -467,7 +506,7 @@ section {max-width:1320px;padding-inline:5vw}
 <div class="project-links">
 <span class="card-status" style="border: 1px solid var(--line); padding: 0.5rem 1rem;">Private client platform, not publicly viewable</span>
 </div>
-</details><details class="project-card"><summary><span class="folder-title">EMPATH Unit Clinical Staffing &amp; Operations Platform</span><span class="folder-desc">Coordinate staffing requests and track scheduling equity on a psychiatric unit.</span></summary>
+</details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">EMPATH Unit Clinical Staffing &amp; Operations Platform</span><span class="folder-desc">Coordinate staffing requests and track scheduling equity on a psychiatric unit.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags"><span class="skill-tag">Nurse Scheduling</span><span class="skill-tag">Scheduling Equity</span><span class="skill-tag">Operational Analytics</span></div>
@@ -484,7 +523,7 @@ section {max-width:1320px;padding-inline:5vw}
 <div class="card-status" style="margin-top: 0.5rem;">Public demonstration with fictional staff and synthetic aggregate unit totals. No patient records or hospital results are shown.</div>
 </div>
 </div>
-<div class="project-links"><a class="btn btn-primary" href="https://kas1172-dotcom.github.io/empath-scheduler/" rel="noopener noreferrer" target="_blank">Explore EMPATH Demo</a><a class="btn btn-outline" href="https://github.com/kas1172-dotcom/empath-scheduler" rel="noopener noreferrer" target="_blank">Code &amp; Metric Definitions</a></div></details><details class="project-card"><summary><span class="folder-title">Healthcare Regulatory &amp; Policy Monitor</span><span class="folder-desc">Turn regulatory updates into weekly briefings for healthcare teams.</span></summary>
+<div class="project-links"><a class="btn btn-primary" href="https://kas1172-dotcom.github.io/empath-scheduler/" rel="noopener noreferrer" target="_blank">Explore EMPATH Demo</a><a class="btn btn-outline" href="https://github.com/kas1172-dotcom/empath-scheduler" rel="noopener noreferrer" target="_blank">Code &amp; Metric Definitions</a></div></details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Healthcare Regulatory &amp; Policy Monitor</span><span class="folder-desc">Turn regulatory updates into weekly briefings for healthcare teams.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -505,7 +544,7 @@ section {max-width:1320px;padding-inline:5vw}
 <a class="btn btn-primary" href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/" rel="noopener noreferrer" target="_blank">View Live Dashboard</a>
 <a class="btn btn-outline" href="https://kas1172-dotcom.github.io/Healthcare_WeeklyNewsletter_Kapil/how-it-works.html" rel="noopener noreferrer" target="_blank">How It Works</a>
 </div>
-</details><details class="project-card"><summary><span class="folder-title">Medicaid Financing Workbench</span><span class="folder-desc">Explore Medicaid financing through public federal datasets.</span></summary>
+</details><details class="project-card" name="selected-project"><summary><span class="paper-stack" aria-hidden="true"><i></i><i></i></span><span class="folder-title">Medicaid Financing Workbench</span><span class="folder-desc">Explore Medicaid financing through public federal datasets.</span></summary>
 <div class="project-card-header">
 <div>
 <div class="project-tags">
@@ -702,5 +741,40 @@ section {max-width:1320px;padding-inline:5vw}
 const menu = document.getElementById('site-menu');
 menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.close()));
 menu.addEventListener('click', event => { if (event.target === menu) menu.close(); });
+
+// Carry one portrait between its two layout positions as the visitor scrolls.
+const source = document.querySelector('.portrait-slot');
+const destination = document.querySelector('.bio-slot');
+const traveler = document.createElement('div');
+traveler.className = 'travel-photo';
+traveler.setAttribute('aria-hidden', 'true');
+traveler.hidden = true;
+traveler.innerHTML = source.innerHTML;
+document.body.append(traveler);
+const motion = matchMedia('(prefers-reduced-motion: reduce)');
+let frame = 0;
+function positionPortrait() {
+  frame = 0;
+  const from = source.getBoundingClientRect();
+  const to = destination.getBoundingClientRect();
+  const distance = Math.max(1, scrollY + to.top + to.height / 2 - innerHeight / 2);
+  const progress = Math.min(1, Math.max(0, scrollY / distance));
+  const active = !motion.matches && progress > 0 && progress < 1;
+  document.body.classList.toggle('photo-in-motion', active);
+  traveler.hidden = !active;
+  if (!active) return;
+  const t = progress * progress * (3 - 2 * progress);
+  for (const key of ['left', 'top', 'width', 'height']) {
+    traveler.style[key] = (from[key] + (to[key] - from[key]) * t) + 'px';
+  }
+}
+function schedulePortrait() {
+  if (!frame) frame = requestAnimationFrame(positionPortrait);
+}
+addEventListener('scroll', schedulePortrait, {passive:true});
+addEventListener('resize', schedulePortrait);
+motion.addEventListener('change', schedulePortrait);
+new ResizeObserver(schedulePortrait).observe(document.querySelector('#about'));
+schedulePortrait();
 </script></body>
 </html>
