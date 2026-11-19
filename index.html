@@ -453,6 +453,17 @@ body:has(dialog[open]) {overflow:hidden}
 @keyframes stride {from{rotate:-22deg}to{rotate:22deg}}
 .closing-scene:not(.playing) .walker,.closing-scene:not(.playing) .walker::after,.closing-scene:not(.playing) .walker i {animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.closing-scene button,.street{display:none}}
+
+@supports (animation-timeline:scroll()) {
+  @media(prefers-reduced-motion:no-preference){
+    nav::after {content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--ink);transform-origin:left;animation:read-page linear both;animation-timeline:scroll(root block)}
+    @keyframes read-page {from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  }
+}
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-group(*) {animation-duration:.36s;animation-timing-function:cubic-bezier(.2,.75,.25,1)}
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+}
 </style>
 </head>
 <body>
@@ -878,5 +889,18 @@ pause.addEventListener('click', () => {
 new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; playScene(); }).observe(scene);
 document.addEventListener('visibilitychange', playScene);
 motion.addEventListener('change', playScene);
+
+// Give each title a stable identity as its folder moves between grid and case study.
+const projectFolders = document.querySelectorAll('details.project-card');
+projectFolders.forEach((folder, index) => {
+  const summary = folder.querySelector('summary');
+  const title = summary.querySelector('.folder-title');
+  title.style.viewTransitionName = 'case-title-' + index;
+  summary.addEventListener('click', event => {
+    if (motion.matches || !document.startViewTransition) return;
+    event.preventDefault();
+    document.startViewTransition(() => { folder.open = !folder.open; });
+  });
+});
 </script></body>
 </html>
